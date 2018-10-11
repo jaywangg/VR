@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+   
+</head>
+<script>
+
+    // var A0s;
+    // var chart;
+
+//    function getA0(){
+//     fetch('http://192.168.1.54/a0')
+//     .then(function (response){
+//         return response.json();
+//     })
+//     .then(function(data){
+//         console.log(data.A0);
+//     });
+//    }
+
+
+
+//     function callBlink(){
+//     fetch('http://192.168.1.54/blink')
+//     .then(function(data){
+//         console.log('ok');
+//     });
+//    }
+
+    function vr1(){
+    fetch('https://cloud.arest.io/vrtest/vr')
+     .then(function (response){
+        return response.json();
+    })
+    .then(function(data){
+        console.log(data.vr);
+        document.getElementById('vrpin1').value = data["vr"];
+    });
+   }
+
+
+//    window.onload = () => {
+//        A0s = ['A0'];
+
+//        chart = c3.generate({
+//            bindto: '#chart',
+//            data: {
+//                columns: [
+//                    A0s
+//                ]
+//            }
+//        });
+//    }
+
+//    function getIp() {
+//        return document.getElementById("ip").value;
+//    }
+//    function updatech() {
+//        var ip = getIp();
+//        fetch('http://' + ip + '/sw')
+//            .then(function(response) {
+//                return response.json();
+//            })
+//            .then(function(data) {
+//                console.log(data);
+//                A0s = A0s.concat(data.A0);
+//                chart.load({
+//                    columns:[
+//                        A0s,
+//                    ]
+//                });
+//            });
+//    }
+   
+//    function updatech() {
+//        var ip = getIp();
+//        fetch('http://192.168.1.10/sw')
+//            .then(function(response) {
+//                return response.json();
+//            })
+//            .then(function(data) {
+//                console.log(data);
+//                A0s = A0s.concat(data.A0);
+//                chart.load({
+//                    columns:[
+//                        A0s,
+//                    ]
+//                });
+//            });
+//    }
+
+//    function autoChart() {
+
+//        setInterval(
+//           ()  => {
+//             updatech();
+//           },
+//           10000);
+
+//    }
+ function AUTOSTART()
+ {      
+      vrmsg = setInterval(
+        ()  => {
+            vr1();
+          },
+         1000);
+ }
+ function AUTOSTOP()
+ {
+     clearInterval(vrmsg);
+ }
+
+
+function vrpin()
+{
+    fetch('https://cloud.arest.io/vrtest/vr')
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+
+        console.log(data["vr"]);
+        document.getElementById('vrpin1').value = data["vr"];
+    });
+}
+
+</script>
+<body>
+    <input type="button" value="VR" onclick="vr1()">
+    <!-- <br>
+    訊息列<br>
+
+    <div id="chart"></div> -->
+
+    <!-- <input type="button" value="A0" onclick="getA0()">
+    <input type="button" value="SW" onclick="SW()">
+    <input type="button" value="Blink" onclick="callBlink()">
+
+    <input type="button" value="Update Chart" onclick="updatech()">
+    <input type="button" value="AutoUPChart" onclick="autoChart()">
+    <div id="chart" ></div> -->
+    <!-- <input type="text" name="" id="ip" value="192.168.1.14"> -->
+    <input type="button" value="START" onclick="AUTOSTART()">
+    <input type="button" value="STOP" onclick="AUTOSTOP()">
+    <br>
+    狀態: <input id='vrpin1' type='text' readonly="readonly">
+</body>
+</html>
